@@ -2,6 +2,8 @@ import React from 'react';
 import Main from './app/components/Main';
 import firebase from "firebase";
 
+import {FlatList, ActivityIndicator, Text, View } from 'react-native';
+
 export default class App extends React.Component {
 
   componentWillMount(){
@@ -16,7 +18,7 @@ export default class App extends React.Component {
   };
   firebase.initializeApp(config);
 
-  console.log(firebase)
+
 
 
 
@@ -25,6 +27,7 @@ export default class App extends React.Component {
 
   render() {
     return (
+    	
     	 
      <Main />
      );
