@@ -11,7 +11,7 @@ export default class FloatingButton extends Component {
 <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
             buttonColor="#9b59b6"
-            title="Agregar Presupuesto"
+            title="Agregar Ingreso"
             onPress={() => console.log("notes tapped!")}
           >
             <Icon name="md-create" style={styles.actionButtonIcon} />
@@ -24,6 +24,17 @@ export default class FloatingButton extends Component {
           >
             <Icon name="md-done-all" style={styles.actionButtonIcon} />
           </ActionButton.Item>
+
+
+          <ActionButton.Item
+            buttonColor="#9b59b6"
+            title="Agregar Presupuesto"
+            onPress={() => console.log("notes tapped!")}
+          >
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+
+
         </ActionButton>
 
 

@@ -4,15 +4,12 @@ import {
   Text,
   StatusBar,
   View,
-  ScrollView,
   FlatList,
   StyleSheet,
   Button
 } from "react-native";
 import Goal from "./Goal";
-//import FloatingButton from './floatingbutton';
 import Remain from "./Remain";
-import BudgetsData from "../data/budgetdata";
 import ActionButton from "react-native-action-button";
 import { Header } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";

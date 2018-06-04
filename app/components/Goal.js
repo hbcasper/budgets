@@ -71,13 +71,13 @@ class GoalItem extends Component {
 			});
 		});
 
-		
+	
 	}
 
-	changeValue(){
+	changeValue(cantidad){
 
 			firebase.database().ref("users/001/budget01").update({
-				asignado: 50000
+				asignado: cantidad
 			}).then(() => {
 				console.log("update!");
 			})
@@ -106,7 +106,9 @@ class GoalItem extends Component {
 							<TextInput
 								keyboardType={"numeric"}
 								defaultValue={this.state.asignado.toString()}
-								onChangeText={(text) => this.setState({asignado:text})}
+								onChangeText={this.changeValue.bind(this)}
+
+								
 								
 							/>
 					
