@@ -1,69 +1,40 @@
-import React, { Component } from 'react';
-import {TouchableOpacity, View, StyleSheet,Text,Alert} from 'react-native';
-
-import { Icon } from 'react-native-elements'
-
+import React, { Component } from "react";
+import { View, StyleSheet } from "react-native";
+import ActionButton from "react-native-action-button";
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default class FloatingButton extends Component {
   render() {
     return (
-     <View  style={styles.float}> 
      
 
+<ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item
+            buttonColor="#9b59b6"
+            title="Agregar Presupuesto"
+            onPress={() => console.log("notes tapped!")}
+          >
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
 
-    <TouchableOpacity 
-    style={styles.actionButton}
-    onPress={() => {
-    Alert.alert('Hey');
-  }}
-    
+          <ActionButton.Item
+            buttonColor="#1abc9c"
+            title="Agregar gasto"
+            onPress={() => {}}
+          >
+            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
 
 
-
-
- >
- <Icon
- raised
-   reverse
-  
-  name='plus'
-  type='font-awesome'
-  color='blue' 
-
-  />
-
-</TouchableOpacity>
-
-     </View>
-
-    );
+   
+   );
   }
 }
-
 const styles = StyleSheet.create({
-  actionButton: {
-    width: 60,  
-height: 60,   
-borderRadius: 30,     
-position : 'absolute',  
-                                                
-
-                                     
-
-
-  },
-  float: {
-
-    flex:1,
-       
-     alignItems: 'flex-end', 
-     marginRight:20,  
-
-
-
-                                     
-
-
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
   },
 });
-

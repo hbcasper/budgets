@@ -19,6 +19,7 @@ export default class Goal extends Component {
 			.database()
 			.ref("users/001/budget01")
 			.set({
+				nombre: 'Compras',
 				asignado: 700,
 				disponible: 50
 			})
@@ -32,21 +33,14 @@ export default class Goal extends Component {
 
 	render() {
 		return (
-			<View
-				style={{
-					marginTop: 22,
-					borderBottomWidth: 1,
-					borderColor: "black",
-					marginBottom: 2
-				}}
-			>
+			
 				<FlatList
 					data={BudgetsData}
 					renderItem={({ item, index }) => {
 						return <GoalItem item={item} index={index} />;
 					}}
 				/>
-			</View>
+			
 		);
 	}
 }
@@ -68,12 +62,35 @@ class GoalItem extends Component {
 				disponible: snapshot.val()
 			});
 		});
+
+		var refNa = firebase.database().ref("users/001/budget01/nombre/");
+
+		refNa.on("value", snapshot => {
+			this.setState({
+				nombre: snapshot.val()
+			});
+		});
+
+		
 	}
+
+	changeValue(){
+
+			firebase.database().ref("users/001/budget01").update({
+				asignado: 50000
+			}).then(() => {
+				console.log("update!");
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		}
 
 	constructor() {
 		super();
 
 		this.state = {
+			nombre: '',
 			asignado: 0,
 			disponible: 0
 		};
@@ -82,19 +99,17 @@ class GoalItem extends Component {
 	render() {
 		return (
 			<View style={styles.FlatList}>
-				<Card title={this.props.item.name}>
+				<Card title={this.state.nombre}>
 					<View style={styles.SingleBudget}>
 						<View style={styles.ListItem}>
 							<Text style={styles.GoalItem}>Asignado:</Text>
 							<TextInput
 								keyboardType={"numeric"}
-								value={this.state.asignado.toString()}
-								onChangeText={text =>
-									this.setState({
-										text
-									})
-								}
+								defaultValue={this.state.asignado.toString()}
+								onChangeText={(text) => this.setState({asignado:text})}
+								
 							/>
+					
 						</View>
 
 						<View style={styles.ListItem}>
