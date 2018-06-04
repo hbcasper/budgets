@@ -12,30 +12,23 @@ import { Card } from "react-native-elements";
 import firebase from "firebase";
 
 export default class Goal extends Component {
+	// firebase.initializeApp(config);
 
-
- // firebase.initializeApp(config);
-
-componentDidMount(){
-
-firebase.database().ref('users/001/budget01').set(
-
-  {
-  	avaliable: 500,
-  	spent: 30
-  }
-
-  ).then(() => {
-
-  	console.log('INSERTED!');
-  }).catch((error) =>
-
-  {
-  	console.log(error);
-
-  });
-}
-
+	componentDidMount() {
+		firebase
+			.database()
+			.ref("users/001/budget01")
+			.set({
+				asignado: 700,
+				disponible: 50
+			})
+			.then(() => {
+				console.log("INSERTED!");
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
 	render() {
 		return (
@@ -59,39 +52,55 @@ firebase.database().ref('users/001/budget01').set(
 }
 
 class GoalItem extends Component {
+	componentDidMount() {
+		var refAv = firebase.database().ref("users/001/budget01/asignado/");
 
+		refAv.on("value", snapshot => {
+			this.setState({
+				asignado: snapshot.val()
+			});
+		});
 
-	
+		var refRe = firebase.database().ref("users/001/budget01/disponible/");
 
+		refRe.on("value", snapshot => {
+			this.setState({
+				disponible: snapshot.val()
+			});
+		});
+	}
 
+	constructor() {
+		super();
 
-constructor(){
-	super()
-	this.state = {avaliable:500,remain:400}
-}
-
+		this.state = {
+			asignado: 0,
+			disponible: 0
+		};
+	}
 
 	render() {
 		return (
 			<View style={styles.FlatList}>
 				<Card title={this.props.item.name}>
 					<View style={styles.SingleBudget}>
-					
-
 						<View style={styles.ListItem}>
-							<Text style={styles.GoalItem}>Asignado: </Text>
+							<Text style={styles.GoalItem}>Asignado:</Text>
 							<TextInput
 								keyboardType={"numeric"}
-								defaultValue={this.props.item.remain}
-								onChangeText={text => this.setState({ text })}
+								value={this.state.asignado.toString()}
+								onChangeText={text =>
+									this.setState({
+										text
+									})
+								}
 							/>
 						</View>
-						
 
 						<View style={styles.ListItem}>
-						<Text style={styles.GoalItem}>Disponible:</Text>
+							<Text style={styles.GoalItem}>Disponible:</Text>
 							<Text style={styles.GoalItem}>
-								{this.state.remain}
+								{this.state.disponible}
 							</Text>
 						</View>
 					</View>
@@ -104,8 +113,7 @@ const styles = StyleSheet.create({
 	GoalItem: {
 		color: "grey",
 		padding: 10,
-		fontSize: 16,
-		
+		fontSize: 16
 	},
 
 	FlatList: {},
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
 	Titles: {
 		fontSize: 20,
 		fontWeight: "bold",
-		
+
 		padding: 50
 	}
 });
