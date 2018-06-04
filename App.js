@@ -2,9 +2,10 @@ import React from 'react';
 import Main from './app/components/Main';
 import firebase from "firebase";
 
-import {FlatList, ActivityIndicator, Text, View } from 'react-native';
 
 export default class App extends React.Component {
+
+
 
   componentWillMount(){
 
@@ -16,11 +17,11 @@ export default class App extends React.Component {
     storageBucket: "budgets-d6ff5.appspot.com",
     messagingSenderId: "901207872688"
   };
-  firebase.initializeApp(config);
 
 
-
-
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
 }
 

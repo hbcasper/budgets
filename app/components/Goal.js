@@ -9,8 +9,34 @@ import {
 } from "react-native";
 import BudgetsData from "../data/budgetdata";
 import { Card } from "react-native-elements";
+import firebase from "firebase";
 
 export default class Goal extends Component {
+
+
+ // firebase.initializeApp(config);
+
+componentDidMount(){
+
+firebase.database().ref('users/001/budget01').set(
+
+  {
+  	avaliable: 500,
+  	spent: 30
+  }
+
+  ).then(() => {
+
+  	console.log('INSERTED!');
+  }).catch((error) =>
+
+  {
+  	console.log(error);
+
+  });
+}
+
+
 	render() {
 		return (
 			<View
@@ -33,6 +59,18 @@ export default class Goal extends Component {
 }
 
 class GoalItem extends Component {
+
+
+	
+
+
+
+constructor(){
+	super()
+	this.state = {avaliable:500,remain:400}
+}
+
+
 	render() {
 		return (
 			<View style={styles.FlatList}>
@@ -53,7 +91,7 @@ class GoalItem extends Component {
 						<View style={styles.ListItem}>
 						<Text style={styles.GoalItem}>Disponible:</Text>
 							<Text style={styles.GoalItem}>
-								{this.props.item.remain}
+								{this.state.remain}
 							</Text>
 						</View>
 					</View>
