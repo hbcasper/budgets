@@ -5,8 +5,6 @@ import firebase from "firebase";
 
 export default class App extends React.Component {
 
-
-
   componentWillMount(){
 
 	var config = {
