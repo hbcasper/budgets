@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
 	AppRegistry,
@@ -12,32 +11,9 @@ import BudgetsData from "../data/budgetdata";
 import { Card } from "react-native-elements";
 import firebase from "firebase";
 
-
-
-
-export default class Goal extends Component {
+export default class Incomes extends Component {
 	// firebase.initializeApp(config);
 
-	// componentDidMount() {
-	// 	firebase
-	// 		.database()
-	// 		.ref("users/001/budget02")
-	// 		.set({
-	// 			asignado: 300,
-	// 			disponible: 20,
-	// 			nombre: "Medico"
-	// 		})
-	// 		.then(() => {
-	// 			console.log("INSERTED!");
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error);
-	// 		});
-	// }
-
-
-
-	
 
 	render() {
 		return (
@@ -55,30 +31,19 @@ export default class Goal extends Component {
 
 class GoalItem extends Component {
 	componentDidMount() {
-	firebase.database().ref("users/001/budget01/").on("value", snapshot => {
+		var refAv = firebase.database().ref("users/001/budget01/asignado/");
+
+		refAv.on("value", snapshot => {
 			this.setState({
-				asignado: snapshot.child('asignado').val(),
-				disponible: snapshot.child('disponible').val(),
-				nombre: snapshot.child('nombre').val()
+				asignado: snapshot.val()
 			});
 		});
 
-		
+	
 
+		var monthIncomes = firebase.database().ref('users/001/incomes').orderByChild('/cantidad');
 	
 	}
-
-	changeValue(cantidad){
-
-			firebase.database().ref("users/001/budget01").update({
-				asignado: cantidad
-			}).then(() => {
-				console.log("update!");
-			})
-			.catch(error => {
-				console.log(error);
-			});
-		}
 
 	constructor() {
 		super();
@@ -95,18 +60,6 @@ class GoalItem extends Component {
 			<View style={styles.FlatList}>
 				<Card title={this.state.nombre}>
 					<View style={styles.SingleBudget}>
-						<View style={styles.ListItem}>
-							<Text style={styles.GoalItem}>Asignado:</Text>
-							<TextInput
-								keyboardType={"numeric"}
-								defaultValue={this.state.asignado.toString()}
-								onChangeText={this.changeValue.bind(this)}
-
-								
-								
-							/>
-					
-						</View>
 
 						<View style={styles.ListItem}>
 							<Text style={styles.GoalItem}>Disponible:</Text>

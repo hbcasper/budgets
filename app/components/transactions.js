@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
 	AppRegistry,
@@ -12,30 +11,8 @@ import BudgetsData from "../data/budgetdata";
 import { Card } from "react-native-elements";
 import firebase from "firebase";
 
-
-
-
-export default class Goal extends Component {
+export default class Transactions extends Component {
 	// firebase.initializeApp(config);
-
-	// componentDidMount() {
-	// 	firebase
-	// 		.database()
-	// 		.ref("users/001/budget02")
-	// 		.set({
-	// 			asignado: 300,
-	// 			disponible: 20,
-	// 			nombre: "Medico"
-	// 		})
-	// 		.then(() => {
-	// 			console.log("INSERTED!");
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error);
-	// 		});
-	// }
-
-
 
 	
 
@@ -55,15 +32,29 @@ export default class Goal extends Component {
 
 class GoalItem extends Component {
 	componentDidMount() {
-	firebase.database().ref("users/001/budget01/").on("value", snapshot => {
+		var refAv = firebase.database().ref("users/001/budget01/asignado/");
+
+		refAv.on("value", snapshot => {
 			this.setState({
-				asignado: snapshot.child('asignado').val(),
-				disponible: snapshot.child('disponible').val(),
-				nombre: snapshot.child('nombre').val()
+				asignado: snapshot.val()
 			});
 		});
 
-		
+		var refRe = firebase.database().ref("users/001/budget01/disponible/");
+
+		refRe.on("value", snapshot => {
+			this.setState({
+				disponible: snapshot.val()
+			});
+		});
+
+		var refNa = firebase.database().ref("users/001/budget01/nombre/");
+
+		refNa.on("value", snapshot => {
+			this.setState({
+				nombre: snapshot.val()
+			});
+		});
 
 	
 	}

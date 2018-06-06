@@ -8,7 +8,11 @@ import {
   StyleSheet,
   Button
 } from "react-native";
+
 import Goal from "./Goal";
+import Transactions from "./transactions";
+import Incomes from "./incomes";
+
 import Remain from "./Remain";
 import ActionButton from "react-native-action-button";
 import { Header } from "react-native-elements";
@@ -42,7 +46,7 @@ class Transacciones extends React.Component {
           centerComponent={{ text: "SimpleBudget", style: { color: "#fff" } }}
         />
 
-        <Remain />
+        <Transactions />
         <FloatingButton />
       </View>
     );
@@ -58,7 +62,7 @@ class Ingresos extends React.Component {
           centerComponent={{ text: "SimpleBudget", style: { color: "#fff" } }}
         />
 
-        <Remain />
+          <Incomes />
         <FloatingButton />
       </View>
     );
