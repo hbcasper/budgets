@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
 	AppRegistry,
@@ -8,24 +7,21 @@ import {
 	StyleSheet,
 	TextInput
 } from "react-native";
-import BudgetsData from "../data/budgetdata";
 import { Card } from "react-native-elements";
 import firebase from "firebase";
 
-
-
-
 export default class Goal extends Component {
-	// firebase.initializeApp(config);
+	
 
-	// componentDidMount() {
+
+	componentDidMount() {
 	// 	firebase
 	// 		.database()
-	// 		.ref("users/001/budget02")
+	// 		.ref("users/001/budgets/budget02")
 	// 		.set({
-	// 			asignado: 300,
-	// 			disponible: 20,
-	// 			nombre: "Medico"
+	// 			asignado: 500,
+	// 			disponible: 100,
+	// 			nombre: "Ropa"
 	// 		})
 	// 		.then(() => {
 	// 			console.log("INSERTED!");
@@ -33,58 +29,94 @@ export default class Goal extends Component {
 	// 		.catch(error => {
 	// 			console.log(error);
 	// 		});
-	// }
-
-
-
-	
-
-	render() {
-		return (
-			
-				<FlatList
-					data={BudgetsData}
-					renderItem={({ item, index }) => {
-						return <GoalItem item={item} index={index} />;
-					}}
-				/>
-			
-		);
-	}
-}
-
-class GoalItem extends Component {
-	componentDidMount() {
-	firebase.database().ref("users/001/budget01/").on("value", snapshot => {
-			this.setState({
-				asignado: snapshot.child('asignado').val(),
-				disponible: snapshot.child('disponible').val(),
-				nombre: snapshot.child('nombre').val()
-			});
-		});
-
-		
-
-	
-	}
-
-	changeValue(cantidad){
-
-			firebase.database().ref("users/001/budget01").update({
-				asignado: cantidad
-			}).then(() => {
-				console.log("update!");
-			})
-			.catch(error => {
-				console.log(error);
-			});
-		}
+	 }
 
 	constructor() {
 		super();
 
 		this.state = {
-			nombre: '',
+			arrayofData:[],
+		};
+	}
+
+
+	componentWillMount() {
+		// firebase.database().ref("users/001/budget01/").on("value", snapshot => {
+		// 		this.setState({
+		// 			asignado: snapshot.child('asignado').val(),
+		// 			disponible: snapshot.child('disponible').val(),
+		// 			nombre: snapshot.child('nombre').val()
+		// 		});
+		// 	});
+
+		firebase
+			.database()
+			.ref("users/001/budgets")
+			.on("value", snapshot => {
+				data = snapshot.val();
+
+				this.setState({
+					arrayofData: Object.values(data)
+
+					});
+			//console.log(this.state.arrayofData)
+			});
+
+	
+}
+
+
+
+	render() {
+
+console.log(this.state.arrayofData)
+console.log("Hey")
+
+
+
+		return (
+
+
+
+			<FlatList
+  					data={this.state.arrayofData}
+  					//renderItem={({item}) => <Text>{item.cantidad}</Text>}
+				///>
+
+
+				renderItem={({item}) => {
+					return <GoalItem  item={item} />
+			 	}
+			}
+
+			/>
+		);
+	}
+}
+
+class GoalItem extends Component {
+	
+
+	changeValue(cantidad) {
+		firebase
+			.database()
+			.ref("users/001/budget01")
+			.update({
+				asignado: cantidad
+			})
+			.then(() => {
+				console.log("update!");
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+
+	constructor() {
+		super();
+
+		this.state = {
+			nombre: "",
 			asignado: 0,
 			disponible: 0
 		};
@@ -93,25 +125,21 @@ class GoalItem extends Component {
 	render() {
 		return (
 			<View style={styles.FlatList}>
-				<Card title={this.state.nombre}>
+				<Card title={this.props.item.nombre}>
 					<View style={styles.SingleBudget}>
 						<View style={styles.ListItem}>
 							<Text style={styles.GoalItem}>Asignado:</Text>
 							<TextInput
 								keyboardType={"numeric"}
-								defaultValue={this.state.asignado.toString()}
+								defaultValue={this.props.item.asignado.toString()}
 								onChangeText={this.changeValue.bind(this)}
-
-								
-								
 							/>
-					
 						</View>
 
 						<View style={styles.ListItem}>
 							<Text style={styles.GoalItem}>Disponible:</Text>
 							<Text style={styles.GoalItem}>
-								{this.state.disponible}
+								{this.props.item.disponible}
 							</Text>
 						</View>
 					</View>
