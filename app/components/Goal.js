@@ -11,34 +11,30 @@ import { Card } from "react-native-elements";
 import firebase from "firebase";
 
 export default class Goal extends Component {
-	
-
-
 	componentDidMount() {
-	// 	firebase
-	// 		.database()
-	// 		.ref("users/001/budgets/budget02")
-	// 		.set({
-	// 			asignado: 500,
-	// 			disponible: 100,
-	// 			nombre: "Ropa"
-	// 		})
-	// 		.then(() => {
-	// 			console.log("INSERTED!");
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error);
-	// 		});
-	 }
+		// 	firebase
+		// 		.database()
+		// 		.ref("users/001/budgets/budget02")
+		// 		.set({
+		// 			asignado: 500,
+		// 			disponible: 100,
+		// 			nombre: "Ropa"
+		// 		})
+		// 		.then(() => {
+		// 			console.log("INSERTED!");
+		// 		})
+		// 		.catch(error => {
+		// 			console.log(error);
+		// 		});
+	}
 
 	constructor() {
 		super();
 
 		this.state = {
-			arrayofData:[],
+			arrayofData: []
 		};
 	}
-
 
 	componentWillMount() {
 		// firebase.database().ref("users/001/budget01/").on("value", snapshot => {
@@ -57,46 +53,25 @@ export default class Goal extends Component {
 
 				this.setState({
 					arrayofData: Object.values(data)
-
-					});
-			//console.log(this.state.arrayofData)
+				});
+				//console.log(this.state.arrayofData)
 			});
-
-	
-}
-
-
+	}
 
 	render() {
 
-console.log(this.state.arrayofData)
-console.log("Hey")
-
-
-
 		return (
-
-
-
 			<FlatList
-  					data={this.state.arrayofData}
-  					//renderItem={({item}) => <Text>{item.cantidad}</Text>}
-				///>
-
-
-				renderItem={({item}) => {
-					return <GoalItem  item={item} />
-			 	}
-			}
-
+				data={this.state.arrayofData}
+				renderItem={({ item }) => {
+					return <GoalItem item={item} />;
+				}}
 			/>
 		);
 	}
 }
 
 class GoalItem extends Component {
-	
-
 	changeValue(cantidad) {
 		firebase
 			.database()

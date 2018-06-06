@@ -17,8 +17,9 @@ import Remain from "./Remain";
 import ActionButton from "react-native-action-button";
 import { Header } from "react-native-elements";
 import FloatingButton from "./floatingbutton";
-import { TabNavigator, TabBarBottom } from "react-navigation";
+import { TabNavigator, TabBarBottom, createStackNavigator, } from "react-navigation";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 class Main extends React.Component {
   render() {
@@ -68,6 +69,8 @@ class Ingresos extends React.Component {
     );
   }
 }
+
+
 
 export default TabNavigator(
   {
