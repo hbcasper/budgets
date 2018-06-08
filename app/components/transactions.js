@@ -1,28 +1,26 @@
 import React, { Component } from "react";
 import {
-	AppRegistry,
-	Text,
-	View,
-	FlatList,
-	StyleSheet,
-	TextInput
+  AppRegistry,
+  Text,
+  StatusBar,
+  View,
+  FlatList,
+  StyleSheet,
+  Button
 } from "react-native";
-import BudgetsData from "../data/budgetdata";
-import { Card } from "react-native-elements";
-import firebase from "firebase";
 
-export default class Transactions extends Component {
-	// firebase.initializeApp(config);
-
-
-
-	render() {
-		return (
-			<View>
-				
-			</View>
-		);
-	}
-
-
+export default class Transacciones extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, backgroundColor: "#f3f3f3" }}>
+        <View
+          style={{
+            flex: 1
+          }}
+        
+          >
+        </View>
+      </View>
+    );
+  }
 }

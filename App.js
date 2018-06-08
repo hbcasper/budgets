@@ -1,9 +1,15 @@
 import React from 'react';
-import Main from './app/components/Main';
+import Navigator from './app/components/Navigator';
 import firebase from "firebase";
 
+import {
+  View,
+} from "react-native";
 
 export default class App extends React.Component {
+
+
+
 
   componentWillMount(){
 
@@ -26,9 +32,12 @@ if (!firebase.apps.length) {
 
   render() {
     return (
-    	
-    	 
-     <Main />
+     
+      
+
+    
+     <Navigator />
+ 
      );
   }
 }

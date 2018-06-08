@@ -4,39 +4,21 @@ import { Card } from "react-native-elements";
 import firebase from "firebase";
 
 export default class Remain extends Component {
-  componentDidMount() {
-
-    firebase
-      .database()
-      .ref("users/001/global/globalavaliable")
-      .on("value", snapshot => {
-        this.setState({
-          globalavaliable: snapshot.val()
-        });
-      });
-  }
-
-  constructor() {
-    super();
-
-    this.state = {
-      globalavaliable: 0
-    };
-  }
 
   render() {
     return (
       <View>
         <Card>
           <Text style={styles.Titles}>
-            Por presupuestar{" "}
-            <Text style={styles.Num}>{this.state.globalavaliable}</Text>{" "}
+            Por presupuestar
+            <Text style={styles.Num}>{this.props.globalBudget}</Text>{" "}
           </Text>
         </Card>
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   GoalItem: {

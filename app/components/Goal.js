@@ -11,22 +11,22 @@ import { Card } from "react-native-elements";
 import firebase from "firebase";
 
 export default class Goal extends Component {
-	componentDidMount() {
-		// 	firebase
-		// 		.database()
-		// 		.ref("users/001/budgets/budget02")
-		// 		.set({
-		// 			asignado: 500,
-		// 			disponible: 100,
-		// 			nombre: "Ropa"
-		// 		})
-		// 		.then(() => {
-		// 			console.log("INSERTED!");
-		// 		})
-		// 		.catch(error => {
-		// 			console.log(error);
-		// 		});
-	}
+	// componentDidMount() {
+	// 		firebase
+	// 			.database()
+	// 			.ref("users/001/budgets/budget01")
+	// 			.set({
+	// 				asignado: 500,
+	// 				disponible: 100,
+	// 				nombre: "Ropa"
+	// 			})
+	// 			.then(() => {
+	// 				console.log("INSERTED!");
+	// 			})
+	// 			.catch(error => {
+	// 				console.log(error);
+	// 			});
+	// }
 
 	constructor() {
 		super();
